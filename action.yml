@@ -1,0 +1,19 @@
+name: "StatusCake Monitor Control"
+description: "Pauses and restarts one or more StatusCake monitors"
+author: "Clive Walkden"
+branding:
+  icon: "check-circle"
+  color: "green"
+inputs:
+  statuscake_api_token:
+    description: "StatusCake API token"
+    required: true
+  statuscake_monitor_ids:
+    description: "Comma-separated list of StatusCake monitor IDs"
+    required: true
+  action:
+    description: "'pause' to pause the monitor, 'restart' to restart the monitor"
+    required: true
+runs:
+  using: "node20"
+  main: "dist/index.js"

@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Pause monitor
+        uses: ./ # Uses an action in the root directory
+        with:
+          statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
+          statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
+          action: 'pause'
+
+      - name: Wait for 10 seconds
+        run: sleep 10
+
+      - name: Restart monitor
+        uses: ./ # Uses an action in the root directory
+        with:
+          statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
+          statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
+          action: 'restart'
