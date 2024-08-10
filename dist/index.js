@@ -35078,8 +35078,6 @@ var exports = __webpack_exports__;
 const core = __nccwpck_require__(2186);
 const axios = __nccwpck_require__(8757);
 
-/* eslint-disable no-undef */
-
 async function controlStatusCakeMonitor(monitorId, pause, apiToken) {
   try {
     const url = `https://api.statuscake.com/v1/uptime/${monitorId}`;
@@ -35088,16 +35086,18 @@ async function controlStatusCakeMonitor(monitorId, pause, apiToken) {
       Authorization: `Bearer ${apiToken}`,
       "Content-Type": "application/json",
     };
-    console.log(
+    core.info(
       `Updating monitor ${monitorId} to ${pause ? "pause" : "restart"}`,
     );
-    console.log(`URL: ${url}`);
+    core.debug(`URL: ${url}`);
+    core.debug(`pause: ${pause}`);
+    core.debug(`data: ${JSON.stringify(data)}`);
 
     const response = await axios.put(url, data, { headers });
 
-    console.log(`Monitor ${monitorId} updated successfully: ${response.data}`);
+    core.info(`Monitor ${monitorId} updated successfully: ${response.data}`);
   } catch (error) {
-    console.error(`Error updating monitor ${monitorId}: ${error}`);
+    core.error(`Error updating monitor ${monitorId}: ${error}`);
     throw error;
   }
 }
