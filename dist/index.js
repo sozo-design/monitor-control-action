@@ -35074,17 +35074,24 @@ module.exports = JSON.parse('{"application/1d-interleaved-parityfec":{"source":"
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
+var exports = __webpack_exports__;
 const core = __nccwpck_require__(2186);
 const axios = __nccwpck_require__(8757);
 
+/* eslint-disable no-undef */
+
 async function controlStatusCakeMonitor(monitorId, pause, apiToken) {
   try {
-    const url = `https://app.statuscake.com/API/v1/uptime/${monitorId}`;
-    const data = { paused: pause };
+    const url = `https://api.statuscake.com/v1/uptime/${monitorId}`;
+    const data = { paused: pause }; // `pause` is a boolean
     const headers = {
       Authorization: `Bearer ${apiToken}`,
       "Content-Type": "application/json",
     };
+    console.log(
+      `Updating monitor ${monitorId} to ${pause ? "pause" : "restart"}`,
+    );
+    console.log(`URL: ${url}`);
 
     const response = await axios.put(url, data, { headers });
 
@@ -35097,11 +35104,11 @@ async function controlStatusCakeMonitor(monitorId, pause, apiToken) {
 
 async function run() {
   try {
-    const monitorIds = core.getInput("monitor_ids").split(",");
+    const monitorIds = core.getInput("statuscake_monitor_ids").split(",");
     const action = core.getInput("action");
     const apiToken = core.getInput("statuscake_api_token");
 
-    const pause = action === "pause";
+    const pause = action === "pause"; // Convert the action to a boolean
 
     for (const monitorId of monitorIds) {
       await controlStatusCakeMonitor(monitorId, pause, apiToken);
@@ -35112,6 +35119,8 @@ async function run() {
 }
 
 run();
+
+exports.controlStatusCakeMonitor = controlStatusCakeMonitor;
 
 })();
 

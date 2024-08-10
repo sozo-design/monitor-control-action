@@ -4,7 +4,7 @@
   "description": "GitHub Action to pause and restart StatusCake monitors",
   "main": "index.js",
   "scripts": {
-    "test": "node test/test_index.js",
+    "test": "node --no-warnings --experimental-vm-modules $( [ -f ./node_modules/.bin/jest ] && echo ./node_modules/.bin/jest || which jest )",
     "build": "ncc build src/index.js -o dist",
     "format": "prettier --write \"src/**/*.js\"",
     "lint": "eslint --fix \"src/**/*.js\"",
@@ -14,14 +14,17 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.1",
-    "@eslint/js": "^9.9.0",
-    "@semantic-release/github": "^10.1.4",
-    "@vercel/ncc": "^0.38.1",
-    "axios": "^1.7.3",
+    "axios": "^1.7.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^9.1.4",
     "prettier": "^3.3.3",
-    "semantic-release": "^24.0.0"
+    "semantic-release": "^24.0.0",
+    "@eslint/js": "^9.9.0",
+    "@semantic-release/github": "^10.1.4",
+    "@vercel/ncc": "^0.38.1"
   }
 }
