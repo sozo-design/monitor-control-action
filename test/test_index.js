@@ -1,4 +1,4 @@
-const { controlStatusCakeMonitor } = require('../index');
+const { controlStatusCakeMonitor } = require('../src/index');
 
 async function testControlStatusCakeMonitor() {
     const monitorIds = ['12345', '67890'];
