@@ -4,4 +4,4 @@ npm install
 npm run lint
 npm run format
 npm run build
-git add dist/index.js
+git add src/index.js dist/index.js
