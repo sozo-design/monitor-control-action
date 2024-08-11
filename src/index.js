@@ -17,6 +17,8 @@ async function run() {
     const service = new UptimeApi(config);
 
     for (const monitorId of monitorIds) {
+      core.debug(`Processing monitor ID: ${monitorId}`);
+      core.debug(`Pausing monitor: ${pause}`);
       service
         .updateUptimeTest({ testId: monitorId, paused: pause })
         .then((tests) => core.info(JSON.stringify(tests)));
