@@ -33447,6 +33447,8 @@ async function run() {
     const service = new UptimeApi(config);
 
     for (const monitorId of monitorIds) {
+      // trim any whitespace
+      monitorId.trim();
       core.debug(`Processing monitor ID: ${monitorId}`);
       core.debug(`Pausing monitor: ${pause}`);
       service
