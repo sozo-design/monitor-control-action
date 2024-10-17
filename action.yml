@@ -20,6 +20,10 @@ inputs:
   uptimerobot_api_key:
     description: 'UptimeRobot API key'
     required: false
+  debug:
+    description: 'Enable debug mode for detailed logging'
+    required: false
+    default: 'false'
 runs:
   using: 'node20'
   main: 'dist/index.js'
