@@ -1,19 +1,25 @@
-name: "StatusCake Monitor Control"
-description: "Pauses and restarts one or more StatusCake monitors"
-author: "Clive Walkden"
+name: 'StatusCake and UptimeRobot Monitor Control'
+description: 'Pause/Resume monitoring for StatusCake and UptimeRobot during deployments'
+author: 'Clive Walkden, Darshan Gada'
 branding:
-  icon: "check-circle"
-  color: "green"
+  icon: 'check-circle'
+  color: 'green'
 inputs:
-  statuscake_api_token:
-    description: "StatusCake API token"
-    required: true
   statuscake_monitor_ids:
-    description: "Comma-separated list of StatusCake monitor IDs"
-    required: true
+    description: 'Comma-separated list of StatusCake monitor IDs'
+    required: false
+  uptimerobot_monitor_ids:
+    description: 'Comma-separated list of UptimeRobot monitor IDs'
+    required: false
   action:
-    description: "'pause' to pause the monitor, 'restart' to restart the monitor"
+    description: 'Action to perform (pause or resume)'
     required: true
+  statuscake_api_token:
+    description: 'StatusCake API token'
+    required: false
+  uptimerobot_api_key:
+    description: 'UptimeRobot API key'
+    required: false
 runs:
-  using: "node20"
-  main: "dist/index.js"
+  using: 'node20'
+  main: 'dist/index.js'

@@ -1,36 +1,35 @@
-name: Test
+name: Deploy with Monitor Control
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+    - name: Pause Monitoring
+      uses: ./
+      with:
+        action: pause
+        statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
+        uptimerobot_monitor_ids: ${{ secrets.UPTIMEROBOT_MONITOR_IDS }}
+        statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
+        uptimerobot_api_key: ${{ secrets.UPTIMEROBOT_API_KEY }}
 
-      - name: Pause monitor
-        uses: ./ # Uses an action in the root directory
-        with:
-          statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
-          statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
-          action: 'pause'
+    - name: Simulate Deployment
+      run: |
+        echo "Starting deployment..."
+        sleep 30
+        echo "Deployment completed."
 
-      - name: Wait for 30 seconds
-        run: sleep 30
-
-      - name: Restart monitor
-        uses: ./ # Uses an action in the root directory
-        with:
-          statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
-          statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
-          action: 'restart'
+    - name: Resume Monitoring
+      uses: ./
+      with:
+        action: resume
+        statuscake_monitor_ids: ${{ secrets.STATUSCAKE_MONITOR_IDS }}
+        uptimerobot_monitor_ids: ${{ secrets.UPTIMEROBOT_MONITOR_IDS }}
+        statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
+        uptimerobot_api_key: ${{ secrets.UPTIMEROBOT_API_KEY }}
