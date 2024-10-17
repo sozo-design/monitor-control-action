@@ -54,6 +54,8 @@ async function run() {
     const uptimeRobotApiKey = core.getInput("uptimerobot_api_key");
 
     core.debug(`Action: ${action}`);
+    core.debug(`StatusCake API Token provided: ${!!statusCakeApiToken}`);
+    core.debug(`UptimeRobot API Key provided: ${!!uptimeRobotApiKey}`);
 
     if (statusCakeApiToken) {
       const statusCakeMonitorIds = core
