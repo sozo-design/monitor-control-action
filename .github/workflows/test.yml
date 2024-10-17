@@ -32,3 +32,4 @@ jobs:
         uptimerobot_monitor_ids: ${{ secrets.UPTIMEROBOT_MONITOR_IDS }}
         statuscake_api_token: ${{ secrets.STATUSCAKE_API_TOKEN }}
         uptimerobot_api_key: ${{ secrets.UPTIMEROBOT_API_KEY }}
+        debug: true
