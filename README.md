@@ -39,7 +39,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Pause Monitoring
-      uses: sozo-design/monitor-control-action@main
+      uses: sozo-design/status-monitor-control-action@main
       with:
         action: pause
         statuscake_monitor_ids: '123456,789012'
@@ -52,7 +52,7 @@ jobs:
         # Your deployment steps here
 
     - name: Resume Monitoring
-      uses: sozo-design/monitor-control-action@main
+      uses: sozo-design/status-monitor-control-action@main
       with:
         action: resume
         statuscake_monitor_ids: '123456,789012'
@@ -65,7 +65,7 @@ jobs:
 
 1. Add your StatusCake API token and/or UptimeRobot API key as secrets in your GitHub repository settings.
 2. Create a workflow file (e.g., `.github/workflows/deploy.yml`) in your repository and add the steps as shown in the usage example above.
-3. Replace `sozo-design/monitor-control-action@main` with the actual path to this action in your organization.
+3. Replace `sozo-design/status-monitor-control-action@main` with the actual path to this action in your organization.
 4. Update the `statuscake_monitor_ids` and `uptimerobot_monitor_ids` with your actual monitor IDs.
 
 ## Security
